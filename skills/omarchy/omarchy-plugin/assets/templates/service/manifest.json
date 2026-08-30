@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "id": "example.service",
+  "name": "Example service",
+  "version": "0.1.0",
+  "author": "you",
+  "description": "A headless singleton service template.",
+  "kinds": ["service"],
+  "entryPoints": { "service": "Service.qml" }
+}

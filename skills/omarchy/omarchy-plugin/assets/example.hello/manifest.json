@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "id": "example.hello",
+  "name": "Hello",
+  "version": "0.1.0",
+  "author": "you",
+  "license": "MIT",
+  "description": "A starter bar widget: an icon that opens a panel demonstrating the common qs.Ui controls and both settings-persistence styles.",
+  "kinds": ["bar-widget"],
+  "entryPoints": { "barWidget": "BarWidget.qml" },
+  "barWidget": {
+    "displayName": "Hello",
+    "description": "Opens a panel of example controls.",
+    "category": "Fun",
+    "defaultSection": "right",
+    "allowMultiple": false,
+    "defaults": { "name": "world" },
+    "schema": [
+      { "key": "name", "type": "string", "label": "Name to greet", "defaultValue": "world" }
+    ]
+  }
+}

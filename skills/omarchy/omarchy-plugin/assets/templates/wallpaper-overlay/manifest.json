@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "id": "example.overlay",
+  "name": "Example overlay",
+  "version": "0.1.0",
+  "author": "you",
+  "description": "A service that mounts a click-through overlay on the wallpaper layer of every monitor.",
+  "kinds": ["service"],
+  "keepLoaded": true,
+  "entryPoints": { "service": "Root.qml" }
+}
