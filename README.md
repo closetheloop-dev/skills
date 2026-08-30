@@ -1,6 +1,7 @@
 # closetheloop-dev skills
 
-Agent skills maintained by closetheloop-dev.
+Agent skills maintained by closetheloop-dev and installable with the
+[Vercel Labs skills CLI](https://github.com/vercel-labs/skills).
 
 ## Install
 

@@ -9,14 +9,26 @@ and let the shell hot-reload it:
 
 - Clone a built-in as a working copy: `omarchy plugin clone <builtin.id> --edit`
   prints the new id, creates the folder, and opens it in your editor.
-- Or work directly in `~/.config/omarchy/plugins/<id>/` (never the packaged
-  Omarchy source).
+- Or work directly in a **real** folder at `~/.config/omarchy/plugins/<id>/` (not
+  a symlink — see below; and never the packaged Omarchy source).
 
 ## Reloading the installed plugin
 
-- Saving a file anywhere under `~/.config/omarchy/plugins/` **auto-reloads** the
-  plugin's code.
-- `omarchy-shell shell rescanPlugins` forces a re-walk + hot reload.
+The shell watches `~/.config/omarchy/plugins/` with a recursive `inotify` watcher
+(`inotifywait -m -r`) and, on any change under it, calls `reloadPlugins()`: it
+unloads **every** panel/service/widget, clears the QML component cache, and
+re-walks. Practical consequences:
+
+- **Use a real directory with no symlinks inside it.** A recursive `inotify` watch
+  doesn't follow symlinks, so a symlinked `~/.config/omarchy/plugins/<id>` (or any
+  symlinked file within it) never reloads — and `omarchy plugin validate` rejects
+  any symlink anywhere in the tree. Develop in the real folder, or copy from a
+  symlink-free dev tree with a **dereferencing** copy (`cp -aL` or
+  `rsync -a --copy-links`), then run `omarchy plugin validate`.
+- **A save reloads all plugins, not just yours** — it's a full teardown + re-walk.
+  `omarchy-shell shell rescanPlugins` forces the same full reload. Only
+  enable/disable/move (`omarchy plugin enable|disable`, `omarchy bar move`) act on
+  a single plugin.
 - `omarchy-restart-shell` stops all shell instances and launches one fresh (a
   clean engine). Use it after big changes or if a reload seems half-applied.
 
